@@ -1,6 +1,21 @@
 [package]
 name = "ali-dns"
-version = "0.1.0"
+version = "0.0.0"
 edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "an aliyun dns skd"
+authors = ["sanmu <578595193@qq.com>"]
+repository = "https://github.com/rust-china/ali-dns"
+documentation = "https://docs.rs/ali-dns"
+categories = ["api-bindings"]
+keywords = ["async", "aliyun", "dns", "sdk"]
+exclude = ["/examples"]
 
 [dependencies]
+anyhow = "1.0"
+reqwest = "0.12"
+
+[dev-dependencies]
+dotenvy = "0.15.7"
+tokio = { version = "1.38", features = ["full"] }
+ali-dns = { path = "." }
