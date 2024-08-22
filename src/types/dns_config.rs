@@ -1,14 +1,8 @@
 use base64::{engine::general_purpose::STANDARD, Engine};
-use reqwest::{header, Method, Url};
+use reqwest::{Method, Url};
 
 #[derive(Debug, Clone)]
 pub struct DnsConfig {
-	pub access_key_id: String,
-	pub access_key_secret: String,
-}
-
-#[derive(Debug, Clone)]
-pub struct DNSConfig {
 	pub access_key_id: String,
 	pub access_key_secret: String,
 }
@@ -27,7 +21,7 @@ impl DnsConfig {
 			access_key_secret: access_key_secret.to_string(),
 		}
 	}
-	pub fn get_request(&self, method: Method, body: Option<bytes::Bytes>) -> anyhow::Result<reqwest::Request> {
+	pub fn get_request(&self, method: Method, _body: Option<bytes::Bytes>) -> anyhow::Result<reqwest::Request> {
 		let mut url = Url::parse("https://alidns.aliyuncs.com/")?;
 		let nonce = format!("{}", rand::random::<u64>());
 		let now = chrono::Utc::now().format("%Y-%m-%dT%H:%M:%SZ").to_string();
@@ -41,7 +35,7 @@ impl DnsConfig {
 		url.query_pairs_mut().append_pair("SignatureVersion", "1.0");
 		url.query_pairs_mut().append_pair("Timestamp", &now);
 
-		let mut request = reqwest::Request::new(method, url);
+		let request = reqwest::Request::new(method, url);
 		Ok(request)
 	}
 

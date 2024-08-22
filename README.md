@@ -27,7 +27,10 @@ ALI_DNS_ACCESS_KEY_SECRET=xxx
 
 ### Methods:
 
+- query_domain_records(domain_name)
 - add_domain_record(domain_name, rr, rr_type, value, Option<line>)
+- update_domain_record(record_id, rr, rr_type, value, Option<line>)
+- delete_domain_record(record_id)
 
 ---
 
